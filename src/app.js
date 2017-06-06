@@ -1,12 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+require('../semantic/dist/semantic.css');
 require('./common/style/main.css');
-let w1 = "hello",
-    w2 = "world2";
-let sp = <span>worldw</span>
+
+class Nav extends React.Component{
+    render(){
+        return (
+            <div className="ui menu">
+                <div className="item">Noods</div>
+                <div className="item">Home</div>
+                <div className="item">List</div>
+            </div>
+        )
+    }
+}
+
+class Body extends React.Component{
+    render(){
+        return (
+            <div>
+                <img className="img" src={require('./common/img/128H.jpg')} alt=""/>
+            </div>
+
+        )
+    }
+}
 ReactDOM.render(
-    <div style={{color:"red"}}>{w1} {sp}</div>,
+    <div className="ui container">
+        <div className="ui dividing"></div>
+        <Nav/>
+        <Nav/>
+        <Nav/>
+        <Nav/>
+        <Nav/>
+        <Body/>
+    </div>,
     document.getElementById('root')
 );
 
