@@ -3,21 +3,22 @@ import React,{Component} from 'react';
 
 export default class Card extends Component{
     render(){
+        let {imgSrc,name,meta,desc,joined,likeNum} = this.props;
         return (
             <div className="ui card">
                 <div className="image">
-                    <img src={require('img/matthew.jpg')} alt=""/>
+                    <img src={imgSrc} alt=""/>
                 </div>
                 <div className="content">
-                    <div className="header">Matt</div>
+                    <div className="header">{name}</div>
                     <div className="meta">
-                        <a href="">Friends</a>
+                        <a href="">{meta}</a>
                     </div>
-                    <div className="description">Matthew</div>
+                    <div className="description">{desc}</div>
                 </div>
                 <div className="extra content">
-                    <span className="right floated">Joined in 2013 </span>
-                    <span><i className="empty heart icon"></i>75 Like
+                    <span className="right floated">{`Joined in ${joined}`}</span>
+                    <span><i className="empty heart icon"></i>{`${likeNum} Like`}
                     </span>
                 </div>
             </div>
