@@ -1,5 +1,14 @@
 import React,{Component} from 'react';
+import PropTypes from 'prop-types';
 
+let propTypes = {
+    imgSrc: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    meta: PropTypes.string,
+    desc: PropTypes.string,
+    joined: PropTypes.number,
+    likeNum: PropTypes.number
+};
 
 export default class Card extends Component{
     render(){
@@ -25,3 +34,5 @@ export default class Card extends Component{
         )
     }
 }
+
+Card.propTypes = propTypes;
