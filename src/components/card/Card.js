@@ -14,9 +14,18 @@ let contextTypes ={
 }
 
 export default class Card extends Component{
+
+    constructor(){
+        super();
+        this.state = {
+            isHeartON: false
+        }
+    }
     render(){
         let {imgSrc,name,meta,desc,joined,likeNum} = this.props;
         let {et} = this.context;
+        let {isHeartON} = this.state;
+        let heartClass = isHeartON ? '':'empty';
         return (
             <div className="ui card">
                 <div className="image">
@@ -31,7 +40,19 @@ export default class Card extends Component{
                 </div>
                 <div className="extra content">
                     <span className="right floated">{`${et} in ${joined}`}</span>
-                    <span><i className="empty heart icon"></i>{`${likeNum} Like`}
+                    <span><i
+                        className={`${heartClass} heart icon`}
+                        onClick={
+                            function(){
+                                console.log(this);
+                                let {isHeartON} =this.state;
+                                isHeartON = !isHeartON;
+                                this.setState({
+                                    isHeartON
+                                });
+                            }
+                        }
+                    ></i>{`${likeNum} Like`}
                     </span>
                 </div>
             </div>
