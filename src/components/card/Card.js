@@ -15,25 +15,39 @@ let contextTypes ={
 
 export default class Card extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            isHeartON: false
+            isHeartON: false,
+            year: props.joined
         };
         this.heartClick = this.heartClick.bind(this);
+        this.yearAdd = this.yearAdd.bind(this);
     }
     heartClick(){
-        console.log(this);
+        // console.log(this);
         let {isHeartON} =this.state;
         isHeartON = !isHeartON;
         this.setState({
             isHeartON
         });
     }
+
+    yearAdd(){
+        let {year} = this.state;
+        setTimeout(()=>{
+            this.setState({
+                year: year+10
+            })
+            this.heartClick();
+        });
+
+    }
     render(){
+        console.log(888);
         let {imgSrc,name,meta,desc,joined,likeNum} = this.props;
         let {et} = this.context;
-        let {isHeartON} = this.state;
+        let {isHeartON,year} = this.state;
         let heartClass = isHeartON ? '':'empty';
         return (
             <div className="ui card">
@@ -48,7 +62,10 @@ export default class Card extends Component{
                     <div className="description">{desc}</div>
                 </div>
                 <div className="extra content">
-                    <span className="right floated">{`${et} in ${joined}`}</span>
+                    <span
+                        className="right floated"
+                        onClick={this.yearAdd}
+                    >{`${et} in ${year}`}</span>
                     <span><i
                         className={`${heartClass} heart icon`}
                         onClick={this.heartClick}
