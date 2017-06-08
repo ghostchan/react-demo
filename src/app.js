@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{Component}from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import Nav from 'nav/Nav.js';
 import CardWrap from 'cardWrap/CardWrap.js';
 
@@ -58,13 +59,30 @@ let data = [
     }
 ];
 
+class App extends Component{
+    getChildContext(){
+        return{
+            et:"born"
+        }
+    }
+    render(){
+        let {data} = this.props;
+        return (
+            <div className="ui container">
+                <div className="ui dividing"></div>
+                <Nav/>
+                <CardWrap data={data}/>
+            </div>
+        );
+    }
+}
+
+App.childContextTypes={
+    et:PropTypes.string
+}
 
 ReactDOM.render(
-    <div className="ui container">
-        <div className="ui dividing"></div>
-        <Nav/>
-        <CardWrap data={data}/>
-    </div>,
+    <App data={data}/>,
     document.getElementById('root')
 );
 
