@@ -19,7 +19,16 @@ export default class Card extends Component{
         super();
         this.state = {
             isHeartON: false
-        }
+        };
+        this.heartClick = this.heartClick.bind(this);
+    }
+    heartClick(){
+        console.log(this);
+        let {isHeartON} =this.state;
+        isHeartON = !isHeartON;
+        this.setState({
+            isHeartON
+        });
     }
     render(){
         let {imgSrc,name,meta,desc,joined,likeNum} = this.props;
@@ -42,16 +51,7 @@ export default class Card extends Component{
                     <span className="right floated">{`${et} in ${joined}`}</span>
                     <span><i
                         className={`${heartClass} heart icon`}
-                        onClick={
-                            function(){
-                                console.log(this);
-                                let {isHeartON} =this.state;
-                                isHeartON = !isHeartON;
-                                this.setState({
-                                    isHeartON
-                                });
-                            }
-                        }
+                        onClick={this.heartClick}
                     ></i>{`${likeNum} Like`}
                     </span>
                 </div>
