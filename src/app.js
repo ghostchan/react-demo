@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Nav from 'nav/Nav.js';
 import CardWrap from 'cardWrap/CardWrap.js';
+import Home from 'home/Home.js';
 
 require('../semantic/dist/semantic.css');
 require('./common/style/main.css');
@@ -60,18 +61,46 @@ let data = [
 ];
 
 class App extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            view: 'home'
+        }
+        this.changeView = this.changeView.bind(this);
+    }
+
+    changeView(view){
+        this.setState({
+            view
+        });
+    }
     getChildContext(){
         return{
             et:"born"
         }
     }
     render(){
+
+        let {view} = this.state;
+
         let {data} = this.props;
+
+        let viewComp = null;
+        switch(view){
+
+            case 'list':
+                viewComp = <CardWrap data={data}/>
+                break;
+            case 'home':
+
+            default:
+                viewComp = <Home/>
+        }
         return (
             <div className="ui container">
                 <div className="ui dividing"></div>
-                <Nav/>
-                <CardWrap data={data}/>
+                <Nav changeView={this.changeView}/>
+                {viewComp}
             </div>
         );
     }
